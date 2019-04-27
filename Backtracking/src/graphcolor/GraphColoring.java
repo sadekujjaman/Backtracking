@@ -20,10 +20,13 @@ public class GraphColoring {
     static int colorTrack[];
     
     static int adjMat[][];
+    static boolean visited[];
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
         nodes = sc.nextInt();
+        colors = sc.nextInt();
         edges = sc.nextInt();
         
         adjMat = new int[nodes + 1][nodes + 1];
@@ -36,10 +39,25 @@ public class GraphColoring {
             adjMat[u][v] = 1;
             adjMat[v][u] = 1;
         }
-        colors = sc.nextInt();
-//        colorTrack[1] = 1;
-        boolean ans = calculate(1);
-        System.out.println(ans);
+        
+        visited = new boolean[nodes + 1];
+        boolean ans = true;
+        for(int i = 1; i <= nodes; i++){
+        	
+        	if(!visited[i]){
+        		ans = calculate(i);
+        		if(!ans)
+        			break;
+        	}
+        }
+        
+        if(ans){
+        	System.out.println(1);
+        }
+        else{
+        	System.out.println(0);
+        }
+       
         sc.close();
     }
 
@@ -47,6 +65,7 @@ public class GraphColoring {
     private static boolean calculate(int u) {
     
         int j = 0;
+        visited[u] = true;
         for(int i = 1; i <= colors; i++){
           
             for(j = 1; j <= nodes; j++){
@@ -65,6 +84,7 @@ public class GraphColoring {
                 }
                 
                 if(j > nodes){
+                	 
                     return true;
                 }
                  colorTrack[u] = 0;

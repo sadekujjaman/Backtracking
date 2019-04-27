@@ -56,37 +56,7 @@ public class HamiltonPath {
 		return 0;
 	}
 
-	private static void call(Graph g, int u, int color, int[] colorTrack) {
-		
-		if(u > g.nodes){
-			res++;
-//			for(int i = 1; i <= g.nodes; i++){
-//				System.out.println(i + " -> " + colorTrack[i]);
-//			}
-//			System.out.println();
-//			System.out.println();
-			return;
-		}
-		
-		for(int c = 1; c <= color; c++){
-			if(isSafe(g, u, c, colorTrack)){
-				colorTrack[u] = c;
-				call(g, u + 1, color, colorTrack);
-				colorTrack[u] = 0;
-			}
-		}
-	}
-
 	
-
-	private static boolean isSafe(Graph g, int u, int c, int[] colorTrack) {
-		for(Integer e : g.adjList[u]){
-			if(colorTrack[e] == c){
-				return false;
-			}
-		}
-		return true;
-	}
 
 	private static class Graph{
 		int nodes;
